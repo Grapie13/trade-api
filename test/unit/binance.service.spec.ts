@@ -44,30 +44,31 @@ describe('Binance Service', () => {
       const volume = '148976.11427815';
       const klineMock = [
         [
-          [
-            openTime, // Kline open time
-            openPrice, // Open price
-            '0.80000000', // High price
-            '0.01575800', // Low price
-            '0.01577100', // Close price
-            volume, // Volume
-            1499644799999, // Kline Close time
-            '2434.19055334', // Quote asset volume
-            308, // Number of trades
-            '1756.87402397', // Taker buy base asset volume
-            '28.46694368', // Taker buy quote asset volume
-            '0', // Unused field, ignore.
-          ],
+          openTime, // Kline open time
+          openPrice, // Open price
+          '0.80000000', // High price
+          '0.01575800', // Low price
+          '0.01577100', // Close price
+          volume, // Volume
+          1499644799999, // Kline Close time
+          '2434.19055334', // Quote asset volume
+          308, // Number of trades
+          '1756.87402397', // Taker buy base asset volume
+          '28.46694368', // Taker buy quote asset volume
+          '0', // Unused field, ignore.
         ],
       ];
 
-      jest.spyOn(httpServiceMock.axiosRef, 'get').mockResolvedValue(klineMock);
+      jest.spyOn(httpServiceMock.axiosRef, 'get').mockResolvedValue({
+        data: klineMock,
+      });
 
       const response = await binanceService.fetchHistoricalTrades('BTCUSDT');
+      console.log(response);
       const kline = response[0];
 
       expect(kline.openTime).toBe(openTime);
-      expect(kline.openPrice).toBe(openPrice);
+      expect(kline.openPrice).toBe(parseFloat(openPrice));
       expect(kline.volume).toBe(parseFloat(volume));
     });
   });

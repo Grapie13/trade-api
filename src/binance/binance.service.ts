@@ -64,6 +64,7 @@ export class BinanceService {
       }
 
       console.log('Unknown error occurred');
+      console.log(err);
 
       throw new InternalServerErrorException();
     }
