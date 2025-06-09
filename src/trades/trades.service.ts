@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { BinanceService } from '../binance/binance.service';
-import { KlineAnalysisDto } from 'src/dto/kline-analysis.dto';
-import { PriceChange } from 'src/const/price-change.enum';
+import { KlineAnalysisDto } from '../dto/kline-analysis.dto';
+import { PriceChange } from '../const/price-change.enum';
 
 @Injectable()
 export class TradesService {
